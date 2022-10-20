@@ -8,7 +8,9 @@ import pl.esovisco.lab1.character.CharacterService;
 import pl.esovisco.lab1.profession.Profession;
 import pl.esovisco.lab1.profession.ProfessionService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @Component
@@ -24,17 +26,55 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         this.professionService = professionService;
     }
 
+    private String[] commands = new String[]{"quit","print_characters","print_professions","print_all",
+            "add_character", "add_profession"};
+
+    private void print_commands(){
+        System.out.println("Available commands:");
+        for(String c : commands){
+            System.out.println(c);
+        }
+    }
+
+    private void add_character(){
+        System.out.println("Type name:");
+        String name = scanner.nextLine();
+        System.out.println("Type level:");
+        int level,id;
+        Profession profession;
+        try {
+            level = Integer.parseInt(scanner.nextLine());
+            System.out.println("Type profession ID:");
+            id = Integer.parseInt(scanner.nextLine());
+            profession = professionService.find(id).get();
+
+        }catch (Exception e){
+            if(e instanceof NumberFormatException){
+                System.out.println("Value given is not an integer!");
+            }
+            else{
+                System.out.println("There's no Profession with that ID");
+            }
+            return;
+        }
+        Character ch = Character.builder().name(name).level(level).profession(profession).build();
+        characterService.create(ch);
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        String command = "commands";
+        String command;
+        print_commands();
         while( true ){
+
+            command = scanner.nextLine();
 
             if(command.equals("quit")){
                 break;
             }
 
             if(command.equals("commands")){
-                System.out.println("Available commands:\nquit\nprint_characters\nprint_professions\nprint_all");
+                print_commands();
             }
 
             if(command.equals("print_characters")){
@@ -62,7 +102,13 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 }
             }
 
-            command = scanner.nextLine();
+            if(command.equals("add_character")){
+                add_character();
+                continue;
+            }
+
+
+
         }
 
     }
