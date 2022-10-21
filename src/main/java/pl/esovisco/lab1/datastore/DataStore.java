@@ -48,7 +48,7 @@ public class DataStore {
     }
 
     public void deleteProfession(long id)throws IllegalArgumentException{
-        findCharacterById(id).ifPresentOrElse(
+        findProfessionById(id).ifPresentOrElse(
                 original -> professions.remove(original),
                 () -> {
                     throw new IllegalArgumentException(

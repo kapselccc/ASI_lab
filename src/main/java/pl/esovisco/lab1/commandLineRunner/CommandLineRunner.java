@@ -4,14 +4,12 @@ package pl.esovisco.lab1.commandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.esovisco.lab1.character.Character;
+import pl.esovisco.lab1.character.CharacterRepository;
 import pl.esovisco.lab1.character.CharacterService;
 import pl.esovisco.lab1.profession.Profession;
 import pl.esovisco.lab1.profession.ProfessionService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
@@ -27,7 +25,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     }
 
     private String[] commands = new String[]{"quit","print_characters","print_professions","print_all",
-            "add_character", "add_profession"};
+            "add_character", "add_profession", "delete_character", "delete_profession"};
 
     private void print_commands(){
         System.out.println("Available commands:");
@@ -39,18 +37,18 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     private void add_character(){
         System.out.println("Type name:");
         String name = scanner.nextLine();
-        System.out.println("Type level:");
+        System.out.println("Type level (int):");
         int level,id;
         Profession profession;
         try {
             level = Integer.parseInt(scanner.nextLine());
-            System.out.println("Type profession ID:");
+            System.out.println("Type profession ID (long):");
             id = Integer.parseInt(scanner.nextLine());
-            profession = professionService.find(id).get();
+            profession = professionService.find(id).orElseThrow();
 
         }catch (Exception e){
             if(e instanceof NumberFormatException){
-                System.out.println("Value given is not an integer!");
+                System.out.println("Input is not an integer!");
             }
             else{
                 System.out.println("There's no Profession with that ID");
@@ -59,10 +57,86 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         }
         Character ch = Character.builder().name(name).level(level).profession(profession).build();
         characterService.create(ch);
+        System.out.println("Added successfully");
+    }
+
+    private void add_profession(){
+        System.out.println("Type name:");
+        String name = scanner.nextLine();
+
+        System.out.println("Type move speed (double):");
+        double moveSpeed;
+        try{
+            moveSpeed =  Double.parseDouble(scanner.nextLine());
+        }
+        catch (NumberFormatException e){
+                System.out.println("Input is not a double");
+                return;
+        }
+
+        System.out.println("Type base armor (int):");
+        int baseArmor;
+        try{
+            baseArmor =Integer.parseInt(scanner.nextLine());
+        }
+        catch (NumberFormatException e){
+            System.out.println("Input is not an integer");
+            return;
+        }
+
+        Profession p = Profession.builder().name(name).moveSpeed(moveSpeed).baseArmor(baseArmor).build();
+        professionService.create(p);
+        System.out.println("Added successfully");
+    }
+
+    private void delete_character(){
+        System.out.println("Type Character ID:");
+        long id;
+        Character character;
+        try{
+            id = Integer.parseInt(scanner.nextLine());
+            character = characterService.find(id).orElseThrow();
+
+        }
+        catch (Exception e){
+            if(e instanceof NumberFormatException){
+                System.out.println("Input is not a long");
+            }
+            if(e instanceof NoSuchElementException){
+                System.out.println("No character with such ID");
+            }
+            return;
+        }
+        characterService.delete(character);
+        System.out.println("Deleted successfully");
+    }
+
+    private void delete_profession() {
+
+        System.out.println("Type profession ID:");
+        long id;
+        Profession profession;
+
+        try{
+            id = Integer.parseInt(scanner.nextLine());
+            profession = professionService.find(id).orElseThrow();
+        }
+        catch (Exception e){
+            if(e instanceof NumberFormatException){
+                System.out.println("Input is not a long");
+            }
+            if(e instanceof NoSuchElementException){
+                System.out.println("No Profession with such ID");
+            }
+            return;
+        }
+
+        professionService.delete(profession);
+        System.out.println("Deleted successfully");
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args){
         String command;
         print_commands();
         while( true ){
@@ -107,9 +181,22 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 continue;
             }
 
+            if(command.equals("add_profession")){
+                add_profession();
+                continue;
+            }
 
+            if(command.equals("delete_character")){
+                delete_character();
+                continue;
+            }
 
+            if(command.equals("delete_profession")){
+                delete_profession();
+            }
         }
 
     }
+
+
 }

@@ -25,7 +25,7 @@ public class DataInitializer {
     }
 
     @PostConstruct
-    public void init() throws Exception{
+    public void init(){
         Profession wiesniak = Profession.builder().name("Wieśniak").baseArmor(0).moveSpeed(5).build();
         Profession szeregowy = Profession.builder().name("Szeregowy").baseArmor(2).moveSpeed(7).build();
         Profession wot = Profession.builder().name("Wojsko Obrony Terytorialnej").baseArmor(8).moveSpeed(4).build();
@@ -47,5 +47,7 @@ public class DataInitializer {
         characterService.create(czarek);
         characterService.create(arek);
         characterService.create(franek);
+
+
     }
 }
