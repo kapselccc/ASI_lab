@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pl.esovisco.lab1.profession.Profession;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
 @SuperBuilder
@@ -11,13 +13,22 @@ import pl.esovisco.lab1.profession.Profession;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
+@Entity
+@Table(name="characters")
 public class Character {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profession")
     private Profession profession;
 
     private int level;
 
-    private long id;
+
 
 }

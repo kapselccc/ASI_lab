@@ -16,8 +16,7 @@ public class CharacterService {
         this.repository = repository;
     }
 
-    public void create(Character character){
-        repository.create(character);
+    public void create(Character character){repository.save(character);
     }
 
     public void delete(Character character){
@@ -29,6 +28,6 @@ public class CharacterService {
     }
 
     public Optional<Character> find(long id){
-        return repository.find(id);
+        return repository.findById(id);
     }
 }

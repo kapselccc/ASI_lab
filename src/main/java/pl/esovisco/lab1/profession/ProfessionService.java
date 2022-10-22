@@ -17,11 +17,11 @@ public class ProfessionService {
     }
 
     public void create(Profession profession){
-        repository.create(profession);
+        repository.save(profession);
     }
 
     public Optional<Profession> find(long id){
-        return repository.find(id);
+        return repository.findById(id);
     }
 
     public List<Profession> findAll(){
