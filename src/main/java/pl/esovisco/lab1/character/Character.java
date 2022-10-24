@@ -25,6 +25,7 @@ public class Character {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profession")
+    @ToString.Exclude
     private Profession profession;
 
     private int level;

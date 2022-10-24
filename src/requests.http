@@ -1,0 +1,30 @@
+GET http://localhost:8080/characters
+
+###
+
+GET http://localhost:8080/characters/1
+
+###
+
+GET http://localhost:8080/characters/8
+
+###
+
+POST http://localhost:8080/characters
+Content-Type: application/json
+
+{
+  "name": "Łukasz",
+  "profession" : 1,
+  "level": 1
+}
+
+###
+PUT http://localhost:8080/characters/1
+Content-Type: application/json
+
+{
+  "name": "Jan",
+  "profession" : 1,
+  "level": 2
+}

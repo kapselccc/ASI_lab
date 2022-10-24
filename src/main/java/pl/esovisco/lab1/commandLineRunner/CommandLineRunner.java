@@ -24,7 +24,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         this.professionService = professionService;
     }
 
-    private final String[] commands = new String[]{"quit","print_characters","print_professions","print_all",
+    private final String[] commands = new String[]{"commands","quit","print_characters","print_professions","print_all",
             "add_character", "add_profession", "delete_character", "delete_profession"};
 
     private void print_commands(){

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,8 @@ public class ProfessionService {
         this.repository = repository;
     }
 
-    public void create(Profession profession){
-        repository.save(profession);
+    public Profession create(Profession profession){
+        return repository.save(profession);
     }
 
     public Optional<Profession> find(long id){
@@ -30,5 +31,9 @@ public class ProfessionService {
 
     public void delete(Profession profession){
             repository.delete(profession);
+    }
+
+    public void update(Profession profession){
+        repository.save(profession);
     }
 }
