@@ -7,7 +7,9 @@ import pl.esovisco.lab1.character.dto.CreateCharacterRequest;
 import pl.esovisco.lab1.character.dto.GetCharacterResponse;
 import pl.esovisco.lab1.character.dto.GetCharactersResponse;
 import pl.esovisco.lab1.character.dto.UpdateCharacterRequest;
+import pl.esovisco.lab1.profession.Profession;
 import pl.esovisco.lab1.profession.ProfessionService;
+import pl.esovisco.lab1.profession.dto.GetProfessionResponse;
 
 import java.net.URI;
 import java.util.Optional;
@@ -55,5 +57,12 @@ public class CharacterController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("{id}/professions")
+    public ResponseEntity<GetProfessionResponse> getCharactersProfession(@PathVariable long id){
+        Optional<Character> character = characterService.find(id);
+        return character.map(value -> ResponseEntity.ok(GetProfessionResponse
+                                .toProfessionResponse(value.getProfession())))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

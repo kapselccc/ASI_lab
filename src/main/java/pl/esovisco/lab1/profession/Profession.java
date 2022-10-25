@@ -30,7 +30,7 @@ public class Profession {
     @Column(name = "base_armor")
     private int baseArmor;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "profession")
     @ToString.Exclude
     private List<Character> characters;
 

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.esovisco.lab1.character.Character;
+import pl.esovisco.lab1.character.dto.GetCharactersResponse;
 import pl.esovisco.lab1.character.dto.UpdateCharacterRequest;
 import pl.esovisco.lab1.profession.dto.CreateProfessionRequest;
 import pl.esovisco.lab1.profession.dto.GetProfessionResponse;
@@ -53,6 +54,14 @@ public class ProfessionController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("{id}/characters")
+    public ResponseEntity<GetCharactersResponse> getProfessionsCharacters(@PathVariable long id){
+        Optional<Profession> profession = professionService.find(id);
+        return profession.map(value -> ResponseEntity.ok(GetCharactersResponse
+                        .toCharactersResponse(value.getCharacters())))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }
