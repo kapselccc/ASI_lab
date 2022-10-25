@@ -89,5 +89,19 @@ Content-Type: application/json
 "moveSpeed": 1.2,
 "armor": 2
 }
+###
 
+DELETE http://localhost:8080/professions/3
+
+###
+
+DELETE http://localhost:8080/professions/5
+
+####
+
+DELETE http://localhost:8080/characters/1
+
+###
+
+DELETE http://localhost:8080/characters/10
 

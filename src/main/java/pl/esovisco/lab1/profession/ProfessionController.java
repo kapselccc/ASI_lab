@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.esovisco.lab1.character.Character;
+import pl.esovisco.lab1.character.CharacterService;
 import pl.esovisco.lab1.character.dto.GetCharactersResponse;
 import pl.esovisco.lab1.character.dto.UpdateCharacterRequest;
 import pl.esovisco.lab1.profession.dto.CreateProfessionRequest;
@@ -13,6 +14,7 @@ import pl.esovisco.lab1.profession.dto.GetProfessionsResponse;
 import pl.esovisco.lab1.profession.dto.UpdateProfessionRequest;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,9 +22,12 @@ import java.util.Optional;
 public class ProfessionController {
     private final ProfessionService professionService;
 
+    private final CharacterService characterService;
+
     @Autowired
-    public ProfessionController(ProfessionService professionService) {
+    public ProfessionController(ProfessionService professionService, CharacterService characterService) {
         this.professionService = professionService;
+        this.characterService = characterService;
     }
 
     @PostMapping
@@ -62,6 +67,22 @@ public class ProfessionController {
         return profession.map(value -> ResponseEntity.ok(GetCharactersResponse
                         .toCharactersResponse(value.getCharacters())))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteProfession(@PathVariable long id){
+        Optional<Profession> profession = professionService.find(id);
+        if(profession.isPresent()){
+            List<Character> characterList = profession.get().getCharacters();
+            for(Character character : characterList){
+                characterService.delete(character);
+            }
+            professionService.delete(profession.get());
+            return ResponseEntity.accepted().build();
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

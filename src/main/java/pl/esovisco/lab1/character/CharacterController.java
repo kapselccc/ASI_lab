@@ -58,11 +58,24 @@ public class CharacterController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @GetMapping("{id}/professions")
     public ResponseEntity<GetProfessionResponse> getCharactersProfession(@PathVariable long id){
         Optional<Character> character = characterService.find(id);
         return character.map(value -> ResponseEntity.ok(GetProfessionResponse
                                 .toProfessionResponse(value.getProfession())))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteCharacter(@PathVariable long id){
+        Optional<Character> character = characterService.find(id);
+        if(character.isPresent()){
+            characterService.delete(character.get());
+            return ResponseEntity.accepted().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
     }
 }
