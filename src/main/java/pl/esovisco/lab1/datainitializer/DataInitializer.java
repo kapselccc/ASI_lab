@@ -26,9 +26,9 @@ public class DataInitializer {
 
     @PostConstruct
     public void init(){
-        Profession wiesniak = Profession.builder().name("Wieśniak").baseArmor(0).moveSpeed(5).build();
-        Profession szeregowy = Profession.builder().name("Szeregowy").baseArmor(2).moveSpeed(7).build();
-        Profession wot = Profession.builder().name("Wojsko Obrony Terytorialnej").baseArmor(8).moveSpeed(4).build();
+        Profession wiesniak = Profession.builder().id(1L).build();
+        Profession szeregowy = Profession.builder().id(2L).build();
+        Profession wot = Profession.builder().id(3L).build();
 
         professionService.create(wiesniak);
         professionService.create(szeregowy);

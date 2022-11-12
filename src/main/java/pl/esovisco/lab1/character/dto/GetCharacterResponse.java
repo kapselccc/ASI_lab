@@ -13,13 +13,13 @@ public class GetCharacterResponse {
 
     private String name;
 
-    private String profession;
+    private Long profession;
 
     private int level;
 
     public static GetCharacterResponse toCharacterResponse(Character character){
         return GetCharacterResponse.builder().name(character.getName())
-                .profession(character.getProfession().getName())
+                .profession(character.getProfession().getId())
                 .level(character.getLevel())
                 .build();
     }

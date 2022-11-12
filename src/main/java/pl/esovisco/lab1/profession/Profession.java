@@ -19,16 +19,7 @@ import java.util.List;
 @Table(name = "professions")
 public class Profession {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name;
-
-    @Column(name = "move_speed")
-    private double moveSpeed;
-
-    @Column(name = "base_armor")
-    private int baseArmor;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "profession")
     @ToString.Exclude

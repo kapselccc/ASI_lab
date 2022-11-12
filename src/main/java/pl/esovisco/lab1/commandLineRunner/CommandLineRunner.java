@@ -61,30 +61,17 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     }
 
     private void add_profession(){
-        System.out.println("Type name:");
-        String name = scanner.nextLine();
-
-        System.out.println("Type move speed (double):");
-        double moveSpeed;
+        System.out.println("Type ID:");
+        Long id;
         try{
-            moveSpeed =  Double.parseDouble(scanner.nextLine());
+            id =  Long.parseLong(scanner.nextLine());
         }
         catch (NumberFormatException e){
-                System.out.println("Input is not a double");
+                System.out.println("Input is not a long");
                 return;
         }
 
-        System.out.println("Type base armor (int):");
-        int baseArmor;
-        try{
-            baseArmor =Integer.parseInt(scanner.nextLine());
-        }
-        catch (NumberFormatException e){
-            System.out.println("Input is not an integer");
-            return;
-        }
-
-        Profession p = Profession.builder().name(name).moveSpeed(moveSpeed).baseArmor(baseArmor).build();
+        Profession p = Profession.builder().id(id).build();
         professionService.create(p);
         System.out.println("Added successfully");
     }

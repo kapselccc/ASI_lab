@@ -11,17 +11,11 @@ import pl.esovisco.lab1.profession.Profession;
 @ToString
 @EqualsAndHashCode
 public class CreateProfessionRequest {
-    private String name;
-
-    private double moveSpeed;
-
-    private int armor;
+    private Long id;
 
     public static Profession toProfession(CreateProfessionRequest request){
         return Profession.builder()
-                .name(request.getName())
-                .baseArmor(request.getArmor())
-                .moveSpeed(request.getMoveSpeed())
+                .id(request.getId())
                 .build();
     }
 }
