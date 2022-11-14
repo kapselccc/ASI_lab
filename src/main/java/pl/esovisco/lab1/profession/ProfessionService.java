@@ -2,6 +2,7 @@ package pl.esovisco.lab1.profession;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -24,6 +25,7 @@ public class ProfessionService {
     public Optional<Profession> find(long id){
         return repository.findById(id);
     }
+
 
     public List<Profession> findAll(){
         return repository.findAll();

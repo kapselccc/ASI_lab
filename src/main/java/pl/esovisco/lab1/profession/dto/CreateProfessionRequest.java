@@ -8,14 +8,21 @@ import pl.esovisco.lab1.profession.Profession;
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class CreateProfessionRequest {
     private Long id;
+
+    public static CreateProfessionRequest toDto(Profession profession){
+        return CreateProfessionRequest.builder().id(profession.getId()).build();
+    }
 
     public static Profession toProfession(CreateProfessionRequest request){
         return Profession.builder()
                 .id(request.getId())
                 .build();
     }
+
+
 }

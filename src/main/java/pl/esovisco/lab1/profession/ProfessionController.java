@@ -24,7 +24,7 @@ public class ProfessionController {
         this.characterService = characterService;
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Void> createProfession(@RequestBody CreateProfessionRequest request){
         Profession profession = CreateProfessionRequest.toProfession(request);
         profession = professionService.create(profession);
