@@ -3,29 +3,29 @@ package pl.esovisco.lab1.commandLineRunner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.esovisco.lab1.character.Character;
-import pl.esovisco.lab1.character.CharacterRepository;
-import pl.esovisco.lab1.character.CharacterService;
-import pl.esovisco.lab1.profession.Profession;
-import pl.esovisco.lab1.profession.ProfessionService;
+import pl.esovisco.lab1.player.Player;
+import pl.esovisco.lab1.player.PlayerRepository;
+import pl.esovisco.lab1.player.PlayerService;
+import pl.esovisco.lab1.club.Club;
+import pl.esovisco.lab1.club.ClubService;
 
 import java.util.*;
 
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
 
-    private final CharacterService characterService;
-    private final ProfessionService professionService;
+    private final PlayerService playerService;
+    private final ClubService clubService;
     private final Scanner scanner = new Scanner(System.in);
 
     @Autowired
-    public CommandLineRunner(CharacterService characterService, ProfessionService professionService) {
-        this.characterService = characterService;
-        this.professionService = professionService;
+    public CommandLineRunner(PlayerService playerService, ClubService clubService) {
+        this.playerService = playerService;
+        this.clubService = clubService;
     }
 
-    private final String[] commands = new String[]{"commands","quit","print_characters","print_professions","print_all",
-            "add_character", "add_profession", "delete_character", "delete_profession"};
+    private final String[] commands = new String[]{"commands","quit","print_players","print_clubs","print_all",
+            "add_player", "add_club", "delete_player", "delete_club"};
 
     private void print_commands(){
         System.out.println("Available commands:");
@@ -34,33 +34,33 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         }
     }
 
-    private void add_character(){
+    private void add_player(){
         System.out.println("Type name:");
         String name = scanner.nextLine();
-        System.out.println("Type level (int):");
-        int level,id;
-        Profession profession;
+        System.out.println("Type league (int):");
+        int league,id;
+        Club club;
         try {
-            level = Integer.parseInt(scanner.nextLine());
-            System.out.println("Type profession ID (long):");
+            league = Integer.parseInt(scanner.nextLine());
+            System.out.println("Type club ID (long):");
             id = Integer.parseInt(scanner.nextLine());
-            profession = professionService.find(id).orElseThrow();
+            club = clubService.find(id).orElseThrow();
 
         }catch (Exception e){
             if(e instanceof NumberFormatException){
                 System.out.println("Input is not an integer!");
             }
             else{
-                System.out.println("There's no Profession with that ID");
+                System.out.println("There's no Club with that ID");
             }
             return;
         }
-        Character ch = Character.builder().name(name).level(level).profession(profession).build();
-        characterService.create(ch);
+        Player ch = Player.builder().name(name).league(league).club(club).build();
+        playerService.create(ch);
         System.out.println("Added successfully");
     }
 
-    private void add_profession(){
+    private void add_club(){
         System.out.println("Type name:");
         String name = scanner.nextLine();
 
@@ -84,18 +84,18 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
             return;
         }
 
-        Profession p = Profession.builder().name(name).moveSpeed(moveSpeed).baseArmor(baseArmor).build();
-        professionService.create(p);
+        Club p = Club.builder().name(name).moveSpeed(moveSpeed).baseArmor(baseArmor).build();
+        clubService.create(p);
         System.out.println("Added successfully");
     }
 
-    private void delete_character(){
-        System.out.println("Type Character ID:");
+    private void delete_player(){
+        System.out.println("Type Player ID:");
         long id;
-        Character character;
+        Player player;
         try{
             id = Integer.parseInt(scanner.nextLine());
-            character = characterService.find(id).orElseThrow();
+            player = playerService.find(id).orElseThrow();
 
         }
         catch (Exception e){
@@ -103,35 +103,35 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 System.out.println("Input is not a long");
             }
             if(e instanceof NoSuchElementException){
-                System.out.println("No character with such ID");
+                System.out.println("No player with such ID");
             }
             return;
         }
-        characterService.delete(character);
+        playerService.delete(player);
         System.out.println("Deleted successfully");
     }
 
-    private void delete_profession() {
+    private void delete_club() {
 
-        System.out.println("Type profession ID:");
+        System.out.println("Type club ID:");
         long id;
-        Profession profession;
+        Club club;
 
         try{
             id = Integer.parseInt(scanner.nextLine());
-            profession = professionService.find(id).orElseThrow();
+            club = clubService.find(id).orElseThrow();
         }
         catch (Exception e){
             if(e instanceof NumberFormatException){
                 System.out.println("Input is not a long");
             }
             if(e instanceof NoSuchElementException){
-                System.out.println("No Profession with such ID");
+                System.out.println("No Club with such ID");
             }
             return;
         }
 
-        professionService.delete(profession);
+        clubService.delete(club);
         System.out.println("Deleted successfully");
     }
 
@@ -151,48 +151,48 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
                 print_commands();
             }
 
-            if(command.equals("print_characters")){
-                List<Character> characters = characterService.findAll();
-                for(Character character : characters){
-                    System.out.println(character);
+            if(command.equals("print_players")){
+                List<Player> players = playerService.findAll();
+                for(Player player : players){
+                    System.out.println(player);
                 }
             }
 
-            if(command.equals("print_professions")){
-                List<Profession> professions = professionService.findAll();
-                for(Profession profession : professions){
-                    System.out.println(profession);
+            if(command.equals("print_clubs")){
+                List<Club> clubs = clubService.findAll();
+                for(Club club : clubs){
+                    System.out.println(club);
                 }
             }
 
             if(command.equals("print_all")){
-                List<Profession> professions = professionService.findAll();
-                for(Profession profession : professions){
-                    System.out.println(profession);
+                List<Club> clubs = clubService.findAll();
+                for(Club club : clubs){
+                    System.out.println(club);
                 }
-                List<Character> characters = characterService.findAll();
-                for(Character character : characters){
-                    System.out.println(character);
+                List<Player> players = playerService.findAll();
+                for(Player player : players){
+                    System.out.println(player);
                 }
             }
 
-            if(command.equals("add_character")){
-                add_character();
+            if(command.equals("add_player")){
+                add_player();
                 continue;
             }
 
-            if(command.equals("add_profession")){
-                add_profession();
+            if(command.equals("add_club")){
+                add_club();
                 continue;
             }
 
-            if(command.equals("delete_character")){
-                delete_character();
+            if(command.equals("delete_player")){
+                delete_player();
                 continue;
             }
 
-            if(command.equals("delete_profession")){
-                delete_profession();
+            if(command.equals("delete_club")){
+                delete_club();
             }
         }
 

@@ -1,8 +1,8 @@
-package pl.esovisco.lab1.character;
+package pl.esovisco.lab1.player;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import pl.esovisco.lab1.profession.Profession;
+import pl.esovisco.lab1.club.Club;
 
 import javax.persistence.*;
 
@@ -14,8 +14,8 @@ import javax.persistence.*;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name="characters")
-public class Character {
+@Table(name="players")
+public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +24,11 @@ public class Character {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profession")
+    @JoinColumn(name = "club")
     @ToString.Exclude
-    private Profession profession;
+    private Club club;
 
-    private int level;
+    private int league;
 
 
 

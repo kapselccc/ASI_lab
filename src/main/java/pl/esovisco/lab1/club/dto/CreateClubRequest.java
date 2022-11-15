@@ -1,8 +1,8 @@
-package pl.esovisco.lab1.profession.dto;
+package pl.esovisco.lab1.club.dto;
 
 import lombok.*;
-import pl.esovisco.lab1.character.dto.CreateCharacterRequest;
-import pl.esovisco.lab1.profession.Profession;
+import pl.esovisco.lab1.player.dto.CreatePlayerRequest;
+import pl.esovisco.lab1.club.Club;
 
 @Getter
 @Setter
@@ -10,15 +10,15 @@ import pl.esovisco.lab1.profession.Profession;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class CreateProfessionRequest {
+public class CreateClubRequest {
     private String name;
 
     private double moveSpeed;
 
     private int armor;
 
-    public static Profession toProfession(CreateProfessionRequest request){
-        return Profession.builder()
+    public static Club toClub(CreateClubRequest request){
+        return Club.builder()
                 .name(request.getName())
                 .baseArmor(request.getArmor())
                 .moveSpeed(request.getMoveSpeed())

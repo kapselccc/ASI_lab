@@ -1,8 +1,8 @@
-package pl.esovisco.lab1.profession;
+package pl.esovisco.lab1.club;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import pl.esovisco.lab1.character.Character;
+import pl.esovisco.lab1.player.Player;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,8 +16,8 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "professions")
-public class Profession {
+@Table(name = "clubs")
+public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,9 +30,9 @@ public class Profession {
     @Column(name = "base_armor")
     private int baseArmor;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "profession")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
     @ToString.Exclude
-    private List<Character> characters;
+    private List<Player> players;
 
 
 }

@@ -1,6 +1,6 @@
-package pl.esovisco.lab1.character;
+package pl.esovisco.lab1.club;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,6 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<Character, Long> {
+public interface ClubRepository extends JpaRepository<Club,Long> {
 
 }
