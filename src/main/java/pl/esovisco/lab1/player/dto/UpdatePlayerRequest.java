@@ -16,10 +16,10 @@ public class UpdatePlayerRequest {
 
     private String name;
 
-    private int league;
+    private int age;
 
     public static Player toPlayerUpdate(Player player, UpdatePlayerRequest request){
-        player.setLeague(request.getLeague());
+        player.setAge(request.getAge());
         player.setName(request.getName());
         return player;
     }

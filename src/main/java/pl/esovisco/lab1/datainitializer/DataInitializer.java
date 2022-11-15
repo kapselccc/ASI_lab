@@ -26,20 +26,20 @@ public class DataInitializer {
 
     @PostConstruct
     public void init(){
-        Club wiesniak = Club.builder().name("Wieśniak").baseArmor(0).moveSpeed(5).build();
-        Club szeregowy = Club.builder().name("Szeregowy").baseArmor(2).moveSpeed(7).build();
-        Club wot = Club.builder().name("Wojsko Obrony Terytorialnej").baseArmor(8).moveSpeed(4).build();
+        Club wiesniak = Club.builder().name("Wieśniak").league(0).money(5).build();
+        Club szeregowy = Club.builder().name("Szeregowy").league(2).money(7).build();
+        Club wot = Club.builder().name("Wojsko Obrony Terytorialnej").league(8).money(4).build();
 
         clubService.create(wiesniak);
         clubService.create(szeregowy);
         clubService.create(wot);
 
-        Player janek = Player.builder().name("Jan").league(1).club(wiesniak).build();
-        Player darek = Player.builder().name("Dariusz").league(7).club(wiesniak).build();
-        Player marek = Player.builder().name("Marek").league(11).club(szeregowy).build();
-        Player czarek = Player.builder().name("Cezary").league(17).club(szeregowy).build();
-        Player arek = Player.builder().name("Arkadiusz").league(23).club(wot).build();
-        Player franek = Player.builder().name("Franciszek").league(29).club(wot).build();
+        Player janek = Player.builder().name("Jan").age(1).club(wiesniak).build();
+        Player darek = Player.builder().name("Dariusz").age(7).club(wiesniak).build();
+        Player marek = Player.builder().name("Marek").age(11).club(szeregowy).build();
+        Player czarek = Player.builder().name("Cezary").age(17).club(szeregowy).build();
+        Player arek = Player.builder().name("Arkadiusz").age(23).club(wot).build();
+        Player franek = Player.builder().name("Franciszek").age(29).club(wot).build();
 
         playerService.create(janek);
         playerService.create(darek);

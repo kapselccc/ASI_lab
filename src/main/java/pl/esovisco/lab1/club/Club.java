@@ -24,11 +24,11 @@ public class Club {
 
     private String name;
 
-    @Column(name = "move_speed")
-    private double moveSpeed;
+    @Column(name = "money")
+    private double money;
 
-    @Column(name = "base_armor")
-    private int baseArmor;
+    @Column(name = "league")
+    private int league;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
     @ToString.Exclude

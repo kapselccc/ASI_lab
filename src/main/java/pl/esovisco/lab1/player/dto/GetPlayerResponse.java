@@ -15,12 +15,12 @@ public class GetPlayerResponse {
 
     private String club;
 
-    private int league;
+    private int age;
 
     public static GetPlayerResponse toPlayerResponse(Player player){
         return GetPlayerResponse.builder().name(player.getName())
                 .club(player.getClub().getName())
-                .league(player.getLeague())
+                .age(player.getAge())
                 .build();
     }
 }

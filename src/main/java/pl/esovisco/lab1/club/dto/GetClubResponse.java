@@ -12,15 +12,15 @@ import pl.esovisco.lab1.club.Club;
 public class GetClubResponse {
     private String name;
 
-    private double moveSpeed;
+    private double money;
 
     private int armor;
 
     public static GetClubResponse toClubResponse(Club club){
         return GetClubResponse.builder()
                 .name(club.getName())
-                .armor(club.getBaseArmor())
-                .moveSpeed(club.getMoveSpeed())
+                .armor(club.getLeague())
+                .money(club.getMoney())
                 .build();
     }
 }

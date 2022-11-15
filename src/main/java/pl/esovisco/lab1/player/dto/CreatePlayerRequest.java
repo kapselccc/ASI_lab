@@ -18,7 +18,7 @@ public class CreatePlayerRequest {
 
     private Long club;
 
-    private int league;
+    private int age;
 
     /**
      *
@@ -29,7 +29,7 @@ public class CreatePlayerRequest {
     public static Player toPlayer(CreatePlayerRequest request,Function<Long,Club> clubFunction){
         return Player.builder()
                 .name(request.getName())
-                .league(request.getLeague())
+                .age(request.getAge())
                 .club(clubFunction.apply(request.getClub()))
                 .build();
     }

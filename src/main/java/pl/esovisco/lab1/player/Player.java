@@ -28,7 +28,7 @@ public class Player {
     @ToString.Exclude
     private Club club;
 
-    private int league;
+    private int age;
 
 
 

@@ -13,15 +13,15 @@ import pl.esovisco.lab1.club.Club;
 public class CreateClubRequest {
     private String name;
 
-    private double moveSpeed;
+    private double money;
 
     private int armor;
 
     public static Club toClub(CreateClubRequest request){
         return Club.builder()
                 .name(request.getName())
-                .baseArmor(request.getArmor())
-                .moveSpeed(request.getMoveSpeed())
+                .league(request.getArmor())
+                .money(request.getMoney())
                 .build();
     }
 }

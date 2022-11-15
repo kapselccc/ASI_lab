@@ -37,11 +37,11 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
     private void add_player(){
         System.out.println("Type name:");
         String name = scanner.nextLine();
-        System.out.println("Type league (int):");
-        int league,id;
+        System.out.println("Type age (int):");
+        int age,id;
         Club club;
         try {
-            league = Integer.parseInt(scanner.nextLine());
+            age = Integer.parseInt(scanner.nextLine());
             System.out.println("Type club ID (long):");
             id = Integer.parseInt(scanner.nextLine());
             club = clubService.find(id).orElseThrow();
@@ -55,7 +55,7 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
             }
             return;
         }
-        Player ch = Player.builder().name(name).league(league).club(club).build();
+        Player ch = Player.builder().name(name).age(age).club(club).build();
         playerService.create(ch);
         System.out.println("Added successfully");
     }
@@ -65,9 +65,9 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         String name = scanner.nextLine();
 
         System.out.println("Type move speed (double):");
-        double moveSpeed;
+        double money;
         try{
-            moveSpeed =  Double.parseDouble(scanner.nextLine());
+            money =  Double.parseDouble(scanner.nextLine());
         }
         catch (NumberFormatException e){
                 System.out.println("Input is not a double");
@@ -75,16 +75,16 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         }
 
         System.out.println("Type base armor (int):");
-        int baseArmor;
+        int league;
         try{
-            baseArmor =Integer.parseInt(scanner.nextLine());
+            league =Integer.parseInt(scanner.nextLine());
         }
         catch (NumberFormatException e){
             System.out.println("Input is not an integer");
             return;
         }
 
-        Club p = Club.builder().name(name).moveSpeed(moveSpeed).baseArmor(baseArmor).build();
+        Club p = Club.builder().name(name).money(money).league(league).build();
         clubService.create(p);
         System.out.println("Added successfully");
     }
