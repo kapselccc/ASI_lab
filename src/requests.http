@@ -1,63 +1,63 @@
-GET http://localhost:8080/characters
+GET http://localhost:8080/players
 
 ###
 
-GET http://localhost:8080/characters/1
+GET http://localhost:8080/players/1
 
 ###
 
-GET http://localhost:8080/characters/8
+GET http://localhost:8080/players/8
 
 ###
 
-POST http://localhost:8080/characters
+POST http://localhost:8080/players
 Content-Type: application/json
 
 {
   "name": "Łukasz",
-  "profession" : 1,
-  "level": 1
+  "club" : 1,
+  "age": 1
 }
 
 ###
-PUT http://localhost:8080/characters/1
+PUT http://localhost:8080/players/1
 Content-Type: application/json
 
 {
   "name": "Jan",
-  "profession" : 1,
-  "level": 2
+  "club" : 1,
+  "age": 2
 }
 
 ###
 
-PUT http://localhost:8080/characters/10
+PUT http://localhost:8080/players/10
 Content-Type: application/json
 
 {
 "name": "Jan",
-"profession" : 1,
-"level": 2
+"club" : 1,
+"age": 2
 }
 
 ###
 
-GET http://localhost:8080/professions
+GET http://localhost:8080/clubs
 
 ###
 
-GET http://localhost:8080/professions/1
+GET http://localhost:8080/clubs/1
 
 ###
-GET http://localhost:8080/professions/2/characters
-
-###
-
-GET http://localhost:8080/professions/5
+GET http://localhost:8080/clubs/2/players
 
 ###
 
-POST http://localhost:8080/professions
+GET http://localhost:8080/clubs/5
+
+###
+
+POST http://localhost:8080/clubs
 Content-Type: application/json
 
 {
@@ -68,7 +68,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/professions/4
+PUT http://localhost:8080/clubs/4
 Content-Type: application/json
 
 {
@@ -77,7 +77,7 @@ Content-Type: application/json
   "armor": 2
 }
 ###
-PUT http://localhost:8080/professions/5
+PUT http://localhost:8080/clubs/5
 Content-Type: application/json
 
 {
@@ -87,17 +87,17 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:8080/professions/3
+DELETE http://localhost:8080/clubs/3
 
 ###
 
-DELETE http://localhost:8080/professions/5
+DELETE http://localhost:8080/clubs/5
 
 ####
 
-DELETE http://localhost:8080/characters/1
+DELETE http://localhost:8080/players/1
 
 ###
 
-DELETE http://localhost:8080/characters/10
+DELETE http://localhost:8080/players/10
 
