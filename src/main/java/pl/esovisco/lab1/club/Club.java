@@ -1,4 +1,4 @@
-package pl.esovisco.lab1.profession;
+package pl.esovisco.lab1.club;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -11,12 +11,12 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-public class Profession {
+public class Club {
     private String name;
 
-    private double moveSpeed;
+    private double money;
 
-    private int baseArmor;
+    private int league;
 
     private long id;
 }

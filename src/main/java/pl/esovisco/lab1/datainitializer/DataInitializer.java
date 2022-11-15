@@ -2,51 +2,48 @@ package pl.esovisco.lab1.datainitializer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.esovisco.lab1.character.Character;
-import pl.esovisco.lab1.character.CharacterRepository;
-import pl.esovisco.lab1.character.CharacterService;
-import pl.esovisco.lab1.datastore.DataStore;
-import pl.esovisco.lab1.profession.Profession;
-import pl.esovisco.lab1.profession.ProfessionRepository;
-import pl.esovisco.lab1.profession.ProfessionService;
+import pl.esovisco.lab1.player.Player;
+import pl.esovisco.lab1.player.PlayerService;
+import pl.esovisco.lab1.club.Club;
+import pl.esovisco.lab1.club.ClubService;
 
 import javax.annotation.PostConstruct;
 
 @Component
 public class DataInitializer {
 
-    private final CharacterService characterService;
-    private final ProfessionService professionService;
+    private final PlayerService playerService;
+    private final ClubService clubService;
 
     @Autowired
-    public DataInitializer(CharacterService characterService, ProfessionService professionService){
-        this.characterService = characterService;
-        this.professionService = professionService;
+    public DataInitializer(PlayerService playerService, ClubService clubService){
+        this.playerService = playerService;
+        this.clubService = clubService;
     }
 
     @PostConstruct
     public void init(){
-        Profession wiesniak = Profession.builder().name("Wieśniak").baseArmor(0).moveSpeed(5).build();
-        Profession szeregowy = Profession.builder().name("Szeregowy").baseArmor(2).moveSpeed(7).build();
-        Profession wot = Profession.builder().name("Wojsko Obrony Terytorialnej").baseArmor(8).moveSpeed(4).build();
+        Club kormoran = Club.builder().name("Kormoran").league(1).money(5).build();
+        Club legia = Club.builder().name("Legia").league(2).money(7).build();
+        Club wisla = Club.builder().name("Wisła").league(8).money(4).build();
 
-        professionService.create(wiesniak);
-        professionService.create(szeregowy);
-        professionService.create(wot);
+        clubService.create(kormoran);
+        clubService.create(legia);
+        clubService.create(wisla);
 
-        Character janek = Character.builder().name("Jan").level(1).profession(wiesniak).build();
-        Character darek = Character.builder().name("Dariusz").level(7).profession(wiesniak).build();
-        Character marek = Character.builder().name("Marek").level(11).profession(szeregowy).build();
-        Character czarek = Character.builder().name("Cezary").level(17).profession(szeregowy).build();
-        Character arek = Character.builder().name("Arkadiusz").level(23).profession(wot).build();
-        Character franek = Character.builder().name("Franciszek").level(29).profession(wot).build();
+        Player janek = Player.builder().name("Jan").age(20).club(kormoran).build();
+        Player darek = Player.builder().name("Dariusz").age(27).club(kormoran).build();
+        Player marek = Player.builder().name("Marek").age(19).club(legia).build();
+        Player czarek = Player.builder().name("Cezary").age(17).club(legia).build();
+        Player arek = Player.builder().name("Arkadiusz").age(23).club(wisla).build();
+        Player franek = Player.builder().name("Franciszek").age(29).club(wisla).build();
 
-        characterService.create(janek);
-        characterService.create(darek);
-        characterService.create(marek);
-        characterService.create(czarek);
-        characterService.create(arek);
-        characterService.create(franek);
+        playerService.create(janek);
+        playerService.create(darek);
+        playerService.create(marek);
+        playerService.create(czarek);
+        playerService.create(arek);
+        playerService.create(franek);
 
 
     }

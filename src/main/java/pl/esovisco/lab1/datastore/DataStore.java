@@ -1,8 +1,8 @@
 package pl.esovisco.lab1.datastore;
 
 import org.springframework.stereotype.Component;
-import pl.esovisco.lab1.profession.Profession;
-import pl.esovisco.lab1.character.Character;
+import pl.esovisco.lab1.club.Club;
+import pl.esovisco.lab1.player.Player;
 
 import java.util.*;
 
@@ -10,49 +10,49 @@ import java.util.*;
 @Component
 public class DataStore {
 
-    private Set<Profession> professions = new HashSet<>();
+    private Set<Club> clubs = new HashSet<>();
 
-    private Set<Character> characters = new HashSet<>();
-
-
-    public List<Profession> findAllProfessions(){return new ArrayList<>(professions);}
-
-    public List<Character> findAllCharacters(){return new ArrayList<>(characters);}
+    private Set<Player> players = new HashSet<>();
 
 
-    public void createProfession(Profession profession) {
-        profession.setId(findAllProfessions().stream().mapToLong(Profession::getId).max().orElse(0) + 1);
-        professions.add(profession);
+    public List<Club> findAllClubs(){return new ArrayList<>(clubs);}
+
+    public List<Player> findAllPlayers(){return new ArrayList<>(players);}
+
+
+    public void createClub(Club club) {
+        club.setId(findAllClubs().stream().mapToLong(Club::getId).max().orElse(0) + 1);
+        clubs.add(club);
     }
 
-    public void createCharacter(Character character) {
-        character.setId(findAllCharacters().stream().mapToLong(Character::getId).max().orElse(0) + 1);
-        characters.add(character);
+    public void createPlayer(Player player) {
+        player.setId(findAllPlayers().stream().mapToLong(Player::getId).max().orElse(0) + 1);
+        players.add(player);
     }
 
-    public Optional<Profession> findProfessionById(long id){
-        return professions.stream().filter(profession -> profession.getId() == id ).findFirst();
+    public Optional<Club> findClubById(long id){
+        return clubs.stream().filter(club -> club.getId() == id ).findFirst();
     }
 
-    public Optional<Character> findCharacterById(long id){
-        return characters.stream().filter(character -> character.getId() == id ).findFirst();
+    public Optional<Player> findPlayerById(long id){
+        return players.stream().filter(player -> player.getId() == id ).findFirst();
     }
 
-    public void deleteCharacter(long id)throws IllegalArgumentException{
-        findCharacterById(id).ifPresentOrElse(
-                original -> characters.remove(original),
+    public void deletePlayer(long id)throws IllegalArgumentException{
+        findPlayerById(id).ifPresentOrElse(
+                original -> players.remove(original),
                 () -> {
                     throw new IllegalArgumentException(
-                            String.format("The character with id \"%d\" does not exist", id));
+                            String.format("The player with id \"%d\" does not exist", id));
                 });
     }
 
-    public void deleteProfession(long id)throws IllegalArgumentException{
-        findProfessionById(id).ifPresentOrElse(
-                original -> professions.remove(original),
+    public void deleteClub(long id)throws IllegalArgumentException{
+        findClubById(id).ifPresentOrElse(
+                original -> clubs.remove(original),
                 () -> {
                     throw new IllegalArgumentException(
-                            String.format("The profession with id \"%d\" does not exist", id));
+                            String.format("The club with id \"%d\" does not exist", id));
                 });
     }
 }

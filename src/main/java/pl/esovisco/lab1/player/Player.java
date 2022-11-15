@@ -1,8 +1,8 @@
-package pl.esovisco.lab1.character;
+package pl.esovisco.lab1.player;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import pl.esovisco.lab1.profession.Profession;
+import pl.esovisco.lab1.club.Club;
 
 @Getter
 @Setter
@@ -11,12 +11,12 @@ import pl.esovisco.lab1.profession.Profession;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-public class Character {
+public class Player {
     private String name;
 
-    private Profession profession;
+    private Club club;
 
-    private int level;
+    private int age;
 
     private long id;
 
