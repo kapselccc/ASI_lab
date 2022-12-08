@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import pl.esovisco.lab1.player.Player;
@@ -16,12 +17,28 @@ import pl.esovisco.lab1.player.Player;
 @EqualsAndHashCode
 public class GetPlayersResponse {
 
-    private List<String> players;
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    @ToString
+    @EqualsAndHashCode
+    public static class SimplePlayer{
+        Long playerId;
+        String name;
+    }
+
+    @Singular
+    private List<SimplePlayer> players;
 
     public static GetPlayersResponse toPlayersResponse(List<Player> players){
         return GetPlayersResponse.builder()
                 .players(players.stream()
-                            .map(Player::getName)
+                            .map(player -> SimplePlayer.builder()
+                                            .playerId(player.getId())
+                                            .name(player.getName())
+                                            .build())
                             .collect(Collectors.toList()))
                             .build();
     }
